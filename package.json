@@ -7,7 +7,9 @@
     "start": "electron ."
   },
   "repository": "https://github.com/vshelke/neutron",
-  "keywords": ["Rudra"],
+  "keywords": [
+    "Rudra"
+  ],
   "author": "rudra-coders",
   "license": "Private",
   "devDependencies": {
