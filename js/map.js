@@ -82,13 +82,25 @@ var initMap = function () {
     var m = L.marker([12.821260, 80.038329]).addTo(map);
 
 
+    var position=L.control.mousePosition();
+
+    var coordinates=L.control.coordinates({
+                position:"topright",
+                useDMS:true,
+                labelTemplateLat:"N {y}",
+                labelTemplateLng:"E {x}",
+                useLatLngOrder:true
+            });
+
+
     offlineControl.addTo(map);
     offlineLayer.addTo(map);
-
+    position.addTo(map);
+    coordinates.addTo(map);
     map.setView({
         lat: 12.821260,
         lng: 80.038329
-    }, 18);
+    }, 50);
 
 }
 
