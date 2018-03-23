@@ -20,7 +20,17 @@
 .listening {
     color: #34C84A;
 }
+.row .col-md-6 span {
+	font-size: 120%;
+}
 
+.waypoints, .stats {
+	padding-top: 10px;
+}
+
+.waypoints .row {
+	padding-bottom: 10px;
+}
 .compass {
 	position: relative;
 	width: 140px;
@@ -31,8 +41,6 @@
 	border-radius: 40px;
 	border: 5px solid #444;
 	overflow: hidden;
-	left:10px;
-	top:60px;
 }
 
 .compass .disc {
@@ -40,7 +48,7 @@
 	top: 11px;
 	left: 11px;
 	z-index: 200;
-	background-image: url("./assets/compass.png");
+	background-image: url("../images/compass.png");
 	width: 110px;
 	height: 110px;
 	background-size: 100%;
@@ -51,7 +59,7 @@
 	top: 11px;
 	left: 11px;
 	z-index: 1000;
-	background-image: url("./assets/needle1.png");
+	background-image: url("../images/needle.png");
 	width: 110px;
 	height: 110px;
 	background-size: 100%;
