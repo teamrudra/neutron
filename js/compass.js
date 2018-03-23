@@ -5,4 +5,4 @@ var compass = function(dir) {
 	compassDisc.style.transform = "rotate("+ (dir) +"deg)";
 }
 
-module.exports = compass
+module.exports = compass;

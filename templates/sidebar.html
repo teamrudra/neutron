@@ -1,6 +1,85 @@
-<div id="controls" class="container-fluid">
+<div class="container-fluid">
     <h4>Controls</h4>
-    <div class="form-group">
-        <input id="roverip" type="text" class="form-control" placeholder="Rover IP">
+    <input id="roverip" type="text" class="form-control" placeholder="Rover IP"><hr>
+    <div class="stats">
+        <div class="row">
+            <div class="col-md-6">
+                <span>Latitude:</span>
+            </div>
+            <div class="col-md-6">
+                <span id="latitude"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span>Longitude:</span>
+            </div>
+            <div class="col-md-6">
+                <span id="longitude"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span>Heading:</span>
+            </div>
+            <div class="col-md-6">
+                <span id="heading"></span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="waypoints">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Latitude">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Latitude">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Latitude">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Latitude">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Latitude">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Longitude">
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary">Send!</button>
+
+    <hr>
+    <div class="controls">
+        <button class="btn btn-primary">Test</button>
+
+    </div>
+    <hr>
+    <div class="compass">
+        <div class="arrow" id="Needle"></div>
+        <div class="disc" id="compassDiscImg"></div>
     </div>
 </div>
