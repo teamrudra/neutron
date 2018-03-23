@@ -5,5 +5,6 @@ Control GUI for Rudra 18
 
 * `git clone https://github.com/vshelke/neutron.git`
 * `cd neutron`
+* `git checkout development`
 * `npm install`
 * `npm start`
