@@ -1,25 +1,4 @@
-#map { 
-    height: 75%; 
-}
 
-#info {
-    width: 100%;
-    height: 25%;
-    float:left;
-    overflow-y: auto;
-}
-
-.disconnected {
-    color: #FC605B;
-}
-
-.processing {
-    color: #FDBC40;
-}
-
-.listening {
-    color: #34C84A;
-}
 
 .compass {
 	position: relative;
@@ -34,6 +13,7 @@
 	left:10px;
 	top:60px;
 }
+
 
 .compass .disc {
 	position: absolute;
@@ -56,3 +36,4 @@
 	height: 110px;
 	background-size: 100%;
 }
+
