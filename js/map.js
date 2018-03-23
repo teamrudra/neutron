@@ -6,6 +6,7 @@ var initMap = function() {
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoidnNoZWxrZSIsImEiOiJjamYydHA4OGswc2NjMzNsbnJ6N2Jhb2l6In0.Zt_78qmQF6WDcE6MtvPQjA'
     }).addTo(mymap);
+    L.marker([51.505, -0.09]).addTo(mymap);
 }
 
 module.exports = initMap;
