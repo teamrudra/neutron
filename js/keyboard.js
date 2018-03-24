@@ -28,8 +28,7 @@ var processKeys = function() {
     });
     var drive = parseInt(output.substring(0, 8), 2);
     var arm = parseInt(output.substring(8), 2);
-    // sendData(host, 3301, "<" + drive + "," + arm + ">");
+    sendData(host, 3301, "<" + drive + "," + arm + ">");
 }
 
-module.exports.initKeyboard = initKeyboard;
-module.exports.processKeys = processKeys;
+module.exports = initKeyboard;
