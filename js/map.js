@@ -80,8 +80,15 @@ var initMap = function () {
     var map = L.map('map');
 
 
+    lat = ["tf1","tf3","tf5","tf7","tf9"];
+    lon = ["tf2","tf4","tf6","tf8","tf0"];
+
+    point = [0,0,0,0,0];
+    count = 0;
+
     var m = L.marker([12.821260, 80.038329]).addTo(map);
 
+    var popup = L.popup();
 
     var position=L.control.mousePosition();
 
@@ -103,24 +110,6 @@ var initMap = function () {
         lat: 12.821260,
         lng: 80.038329
     }, 50);
-
-    lat = ["tf1","tf3","tf5","tf7","tf9"];
-    lon = ["tf2","tf4","tf6","tf8","tf0"];
-
-    point = [0,0,0,0,0];
-    count = 0;
-
-    var m = L.marker([12.821260, 80.038329]).addTo(map);
-
-    var popup = L.popup();
-
-    offlineControl.addTo(map);
-    offlineLayer.addTo(map);
-
-    map.setView({
-        lat: 12.821260,
-        lng: 80.038329
-    }, 18);
 
     function mapclick(e) {
     if(point[count]!=0)
