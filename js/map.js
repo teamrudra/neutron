@@ -79,6 +79,7 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
 var initMap = function () {
     var map = L.map('map');
 
+
     lat = ["tf1","tf3","tf5","tf7","tf9"];
     lon = ["tf2","tf4","tf6","tf8","tf0"];
 
@@ -89,13 +90,26 @@ var initMap = function () {
 
     var popup = L.popup();
 
+    var position=L.control.mousePosition();
+
+    var coordinates=L.control.coordinates({
+                position:"topright",
+                useDMS:true,
+                labelTemplateLat:"N {y}",
+                labelTemplateLng:"E {x}",
+                useLatLngOrder:true
+            });
+
+
     offlineControl.addTo(map);
     offlineLayer.addTo(map);
+    position.addTo(map);
+    coordinates.addTo(map);
 
     map.setView({
         lat: 12.821260,
         lng: 80.038329
-    }, 18);
+    }, 50);
 
     function mapclick(e) {
     if(point[count]!=0)
