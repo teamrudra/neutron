@@ -1,5 +1,10 @@
 var initMap = require('./map');
-var setupServer = require('./communication');
+var setupServer = require('./communication').setupServer;
+var keyboard = require('./keyboard');
+var compass = require('./compass');
 
 initMap();
-setupServer(3301);
+setupServer(23907);
+keyboard.initKeyboard();
+keyboard.processKeys();
+window.compass = compass;
