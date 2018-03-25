@@ -20,17 +20,15 @@
 .listening {
     color: #34C84A;
 }
+
 .row .col-md-6 span {
 	font-size: 120%;
-}
-
-.waypoints, .stats {
-	padding-top: 5px;
 }
 
 .waypoints .row {
 	padding-bottom: 8px;
 }
+
 .compass {
 	position: relative;
 	width: 140px;
