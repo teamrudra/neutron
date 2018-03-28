@@ -1,7 +1,7 @@
 var sendData = require('./communication').sendData;
 var host = "0.0.0.0";
 var keyMap = { "w":false , "a": false, "s":false, "d":false ,
-               "q":false , "e":false , "r":false , "Control":false , 
+               "q":false , "e":false , "r":false , "Control":false ,
                "ArrowLeft":false , "ArrowRight":false , "ArrowDown":false , "ArrowUp":false ,
                "j":false , "k":false , "l": false, "Shift":false };
 
@@ -18,7 +18,7 @@ var initKeyboard = function() {
         if (event.key === "Enter")
             host = $("#roverip").val();
     });
-    setInterval(processKeys, 100);
+    setInterval(processKeys, 1);
 }
 
 var processKeys = function() {
