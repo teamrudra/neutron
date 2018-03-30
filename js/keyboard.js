@@ -18,7 +18,7 @@ var initKeyboard = function() {
         if (event.key === "Enter")
             host = $("#roverip").val();
     });
-    setInterval(processKeys, 100);
+    setInterval(processKeys, 1);
 }
 
 var processKeys = function() {
