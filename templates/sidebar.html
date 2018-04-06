@@ -1,6 +1,14 @@
 <div class="container-fluid">
-    <h4>Controls</h4>
-    <input id="roverip" type="text" class="form-control" placeholder="Rover IP"><hr>
+    <div class="ipBox">
+        <div class="row">
+            <div class="col-md-8">
+                <input id="roverip" type="text" class="form-control" placeholder="Rover IP" value="192.168.1.22:3301">
+            </div>
+            <div class="col-md-4">
+                <button id="updStatus" class="btn btn-large btn-warning">Start</button>
+            </div>
+        </div>
+    </div>
     <div class="stats">
         <div class="row">
             <div class="col-md-6">
@@ -27,7 +35,6 @@
             </div>
         </div>
     </div>
-    <hr>
     <div class="waypoints">
         <div class="row">
             <div class="col-md-6">
@@ -78,13 +85,11 @@
             </div>
         </div>
     </div>
-    <hr>
     <div class="controls">
         <p>
             Extra features
         </p>
     </div>
-    <hr>
     <div class="compass">
         <div class="arrow" id="Needle"></div>
         <div class="disc" id="compassDiscImg"></div>

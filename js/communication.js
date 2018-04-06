@@ -4,7 +4,7 @@ const rover = dgram.createSocket('udp4');
 
 var setupServer = function(port) {
     server.on('error', (err) => {
-        console.err(`server error:\n${err.stack}`);
+        console.error(`server error:\n${err.stack}`);
         server.close();
     });
     server.on('message', (msg, rinfo) => {
@@ -22,7 +22,7 @@ var setupServer = function(port) {
 var sendData = function(host, port, data) { // data should be string
     var message = new Buffer(data);
     rover.send(message, 0, message.length, port, host, function(err, bytes) {
-        if (err) console.err(err);
+        if (err) console.error(err);
         $("#up").html(` ${bytes}b`);
         // TODO create log
     });
