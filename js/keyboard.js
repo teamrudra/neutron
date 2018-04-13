@@ -35,6 +35,10 @@ var processKeys = function() {
     Object.keys(keyMap).forEach(function(key) {
         output += (keyMap[key] ? "1" : "0");
     });
+    if (keyMap['i'])
+        output = output.substring(0, 8) + "11110000";
+    if (keyMap['o'])
+        output = output.substring(0, 8) + "00001111";
     var drive = parseInt(output.substring(0, 8), 2);
     var arm = parseInt(output.substring(8, 16), 2);
     if (allowData) {
