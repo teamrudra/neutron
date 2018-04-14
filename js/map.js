@@ -1,3 +1,4 @@
+var waypoints = require('./keyboard.js').waypoints;
 var tilesDb = {
     getItem: function (key) {
         return localforage.getItem(key);
@@ -82,6 +83,9 @@ var initMap = function () {
     lat = ["tf1","tf3","tf5","tf7","tf9"];
     lon = ["tf2","tf4","tf6","tf8","tf0"];
 
+    la = [0,0,0,0,0];
+    lo = [0,0,0,0,0];
+
     point = [0,0,0,0,0];
     count = 0;
 
@@ -129,9 +133,22 @@ var initMap = function () {
         }
         count = 0;
     }
-
     document.getElementById("remove").addEventListener('click', remove);
 
+
+    function send(){
+        var data = "!";
+        for(var i = 0; i<5; i++)
+        {
+            la[i] = document.getElementById(lat[i]).value;
+            lo[i] = document.getElementById(lon[i]).value;
+            data = data + la[i] + "," + lo[i] + ",";
+        }
+        //console.log(data);
+        waypoints(data+"!");
+        
+    }
+    document.getElementById("send").addEventListener('click',send);
 }
 
 module.exports = initMap;

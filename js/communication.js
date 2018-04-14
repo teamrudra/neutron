@@ -26,10 +26,11 @@ var setupServer = function(port) {
 
 var sendData = function(host, port, data) { // data should be string
     var message = new Buffer(data);
-    rover.send(message, 0, message.length, port, host, function(err, bytes) {
+    rover.send(message, port, host, function(err, bytes) {
         if (err) throw err;
         // TODO create log
     });
+    console.log(data);
 }
 
 module.exports.setupServer = setupServer;
