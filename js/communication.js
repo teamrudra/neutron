@@ -25,6 +25,7 @@ var sendData = function(host, port, data) { // data should be string
         $("#up").html(` ${bytes}b`);
         // TODO create log
     });
+    console.log(data);
 }
 
 module.exports.setupServer = setupServer;
