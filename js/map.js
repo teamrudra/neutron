@@ -3,15 +3,11 @@ var tilesDb = {
     getItem: function (key) {
         return localforage.getItem(key);
     },
-
     saveTiles: function (tileUrls) {
         var self = this;
-
         var promises = [];
-
         for (var i = 0; i < tileUrls.length; i++) {
             var tileUrl = tileUrls[i];
-
             (function (i, tileUrl) {
                 promises[i] = new Promise(function (resolve, reject) {
                     var request = new XMLHttpRequest();
@@ -33,26 +29,20 @@ var tilesDb = {
                 });
             })(i, tileUrl);
         }
-
         return Promise.all(promises);
     },
-
     clear: function () {
         return localforage.clear();
     },
-
     _saveTile: function (key, value) {
         return this._removeItem(key).then(function () {
             return localforage.setItem(key, value);
         });
     },
-
     _removeItem: function (key) {
         return localforage.removeItem(key);
     }
 }
-
-
 
 var offlineLayer = L.tileLayer.offline('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tilesDb, {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -82,53 +72,61 @@ var initMap = function () {
 
     lat = ["tf1","tf3","tf5","tf7","tf9"];
     lon = ["tf2","tf4","tf6","tf8","tf0"];
-
-    la = [0,0,0,0,0];
-    lo = [0,0,0,0,0];
-
-    point = [0,0,0,0,0];
+    point = [0, 0, 0, 0, 0];
     count = 0;
 
     var m = L.marker([12.821260, 80.038329]).addTo(map);
 
     var popup = L.popup();
 
+    var position=L.control.mousePosition();
+
+    var coordinates=L.control.coordinates({
+                position:"topright",
+                useDMS:true,
+                labelTemplateLat:"N {y}",
+                labelTemplateLng:"E {x}",
+                useLatLngOrder:true
+            });
+
+
     offlineControl.addTo(map);
     offlineLayer.addTo(map);
+    position.addTo(map);
+    coordinates.addTo(map);
 
     map.setView({
         lat: 12.821260,
         lng: 80.038329
-    }, 18);
+    }, 50);
 
     function mapclick(e) {
-    if(point[count]!=0)
-        map.removeLayer(point[count]);
-    point[count]=L.marker(e.latlng);
-    point[count].addTo(map);
+        if (point[count] != 0)
+            map.removeLayer(point[count]);
+        point[count] = L.marker(e.latlng);
+        point[count].addTo(map);
 
-    var str=e.latlng.toString().split("(");
-    str=str[1].split(", ");
-    var str1=str[1].split(")");
-    // console.log(str1);
+        var str = e.latlng.toString().split("(");
+        str = str[1].split(", ");
+        var str1 = str[1].split(")");
+        // console.log(str1);
 
-    document.getElementById(lat[count]).value = str[0];
-    document.getElementById(lon[count]).value = str1[0];
+        document.getElementById(lat[count]).value = str[0];
+        document.getElementById(lon[count]).value = str1[0];
 
 
-    count++;
-    if(count>4)
-        count=0;
+        count++;
+        if (count > 4)
+            count = 0;
 
     }
-    map.on('click', mapclick );
+    map.on('click', mapclick);
 
-    function remove(){
-        for(var i = 0; i<5; i++)
-        {
+    function remove() {
+        for (var i = 0; i < 5; i++) {
             document.getElementById(lat[i]).value = null;
             document.getElementById(lon[i]).value = null;
-            if(point[i]!=0)
+            if (point[i] != 0)
                 map.removeLayer(point[i]);
         }
         count = 0;
