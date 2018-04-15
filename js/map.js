@@ -1,4 +1,10 @@
-var waypoints = require('./keyboard.js').waypoints;
+var sendData = require('./communication').sendData;
+var host = "0.0.0.0";
+var port = 3301;
+
+var m = 0;
+var map = 0;
+
 var tilesDb = {
     getItem: function (key) {
         return localforage.getItem(key);
@@ -68,14 +74,19 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
 });
 
 var initMap = function () {
-    var map = L.map('map');
-
+    map = L.map('map');
+    // console.log(map);
+    
     lat = ["tf1","tf3","tf5","tf7","tf9"];
     lon = ["tf2","tf4","tf6","tf8","tf0"];
+
+    la = [null,null,null,null,null];
+    lo = [null,null,null,null,null];
+
     point = [0, 0, 0, 0, 0];
     count = 0;
 
-    var m = L.marker([12.821260, 80.038329]).addTo(map);
+    m = L.marker([12.821260, 80.038329]).addTo(map);
 
     var popup = L.popup();
 
@@ -126,27 +137,46 @@ var initMap = function () {
         for (var i = 0; i < 5; i++) {
             document.getElementById(lat[i]).value = null;
             document.getElementById(lon[i]).value = null;
+            la[i] = null;
+            lo[i] = null;
             if (point[i] != 0)
                 map.removeLayer(point[i]);
+            sendData(host, port, "$#");
         }
+        alert("The safest hands are yours..!!");
         count = 0;
     }
     document.getElementById("remove").addEventListener('click', remove);
 
 
     function send(){
-        var data = "!";
-        for(var i = 0; i<5; i++)
+        host = $("#roverip").val().split(":")[0];
+        port = $("#roverip").val().split(":")[1];
+        var data = "#";
+        for(var i = 0; $("#"+lat[i]).val()  ; i++)
         {
             la[i] = document.getElementById(lat[i]).value;
             lo[i] = document.getElementById(lon[i]).value;
-            data = data + la[i] + "," + lo[i] + ",";
+            data = data + la[i] + "," + lo[i] + "!" ;
         }
-        //console.log(data);
-        waypoints(data+"!");
+        // console.log(data + "$");
+        alert("Buckle-up and watch..!!");
+        sendData(host, port, data + "$");
         
     }
     document.getElementById("send").addEventListener('click',send);
+
+    function test() {
+        console.log("This is a test");
+    }
+
+    return [map, m];
 }
 
+// var update_marker = function( lat, lon){
+//     map.removeLayer(m);
+//     m = L.marker([lat, lon]).addTo(map);
+// }
+
 module.exports = initMap;
+// module.exports = update_marker;

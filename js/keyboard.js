@@ -42,7 +42,7 @@ var processKeys = function() {
     var drive = parseInt(output.substring(0, 8), 2);
     var arm = parseInt(output.substring(8, 16), 2);
     if (allowData) {
-        console.log(drive + " " + arm);
+        // console.log(drive + " " + arm);
         sendData(host, port, "<" + drive + "," + arm + ">");
     }
 }
