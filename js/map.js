@@ -1,5 +1,3 @@
-var sendData = require('./communication').sendData;
-
 var tilesDb = {
     getItem: function (key) {
         return localforage.getItem(key);
@@ -71,7 +69,6 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
 var initMap = function (latitude, longitude) {
     var map = L.map('map');
     var m = L.marker([latitude, longitude]).addTo(map);
-    var popup = L.popup();
     var position = L.control.mousePosition();
     var coordinates = L.control.coordinates({
                 position:"topright",
@@ -87,47 +84,8 @@ var initMap = function (latitude, longitude) {
     map.setView({
         lat: latitude,
         lng: longitude
-    }, 50);
-
-    
-    lat = ["lat1","lat2","lat3","lat4","lat5"];
-    lon = ["lon1","lon2","lon3","lon4","lon5"];
-    point = [0, 0, 0, 0, 0];
-    count = 0;
-
-    map.on('click', function(e) {
-        if (point[count] != 0)
-            map.removeLayer(point[count]);
-        point[count] = L.marker(e.latlng);
-        point[count].addTo(map);
-        document.getElementById(lat[count]).value = e.latlng.lat.toFixed(6);
-        document.getElementById(lon[count]).value = e.latlng.lng.toFixed(6);
-        count++;
-        if (count > 4)
-            count = 0;
-    });
-
-    $('#remove').click(function() {
-        for (var i = 0; i < 5; i++) {
-            document.getElementById(lat[i]).value = null;
-            document.getElementById(lon[i]).value = null;
-            if (point[i] != 0)
-                map.removeLayer(point[i]);
-        }
-        count = 0;
-        sendData('$#', 1);
-    });
-
-    $('#send').click(function() {
-        var data = '#';
-        for (var i = 0; i<5;i++) {
-            if ($('#' + lat[i]).val() && $('#' + lon[i]).val() )
-                data += $('#' + lat[i]).val() + ',' + $('#' + lon[i]).val() + '!' ;
-        }
-        data = data.slice(0, -1) + '$';
-        sendData(data, 1);
-    });
-    
+    }, 50);  
+    return map;  
 }
 
 module.exports = initMap;
