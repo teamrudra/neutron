@@ -9,7 +9,7 @@ var count = 0;
 var DATA_RATE = 1; //ms
 
 var map = initMap(12.821260, 80.038329);
-link.setupServer(23907); // Groud Station server listning on 23907 never change!!!!
+link.setupServer(map, 23907); // Groud Station server listning on 23907 never change!!!!
 control.initKeyboard();
 
 // setting up required listners 
