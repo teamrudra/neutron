@@ -15,6 +15,12 @@ var setupServer = function(map, port) {
     server.on('message', (msg, rinfo) => {
         $("#rover").html(`${rinfo.address}:${rinfo.port}`);
         // console.log(msg);
+        //decode compass and update the compass in status html and compass.
+        //try 'windows-1251' format instead of ascii to decode for compass and acknowladgement values.        
+        //check for ackmowladgment and enable the send button.
+        //if(acknowladgement)
+        //  $('#send').prop('disabled', false);
+        //change the pan(autoStatus) to green.
         var data = new TextDecoder("ascii").decode(msg);
         if (data[0] === '{')
             data = JSON.parse(data);
@@ -27,7 +33,8 @@ var setupServer = function(map, port) {
             console.log(oldPoint);
             if(oldPoint != 0)
                 map.removeLayer(oldPoint);     
-            oldPoint = L.marker([data.lat, data.lon]).addTo(map);
+            oldPoint = L.marker([data.lat, data.lon])
+            oldPoint = oldPoint.addTo(map);
             // console.log(data);
         }
         $("#down").html(` ${msg.length}b`);

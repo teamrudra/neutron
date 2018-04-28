@@ -6,6 +6,8 @@ var compass = require('./compass');
 var point = [0, 0, 0, 0, 0];
 var count = 0;
 
+var flag = false;
+
 var DATA_RATE = 1; //ms
 
 var map = initMap(12.821260, 80.038329);
@@ -36,15 +38,45 @@ $('#remove').click(function() {
             map.removeLayer(point[i]);
     }
     count = 0;
-    link.sendData('$#', 1);
+    if(flag)
+        link.sendData('$#', 1);
+    $('#send').prop('disabled', false);
 });
 
 $('#send').click(function() {
     var data = '#';
+    if(flag)
+        link.sendData(data, 1);
+});
+
+$('#show').click(function(){
     for (var i = 0; i<5;i++) {
         if ($('#lat' + i ).val() && $('#lon' + i ).val() )
-            data += $('#lat' + i ).val() + ',' + $('#lon' + i ).val() + '!' ;
+        {
+            //console.log(typeof(parseInt($('#lat' + i).val())));
+            if(point[i]!=0)
+                map.removeLayer(point[i]);
+            // jQuery here to look cool.
+            point[i] = L.marker([document.getElementById('lat' + i).value,document.getElementById('lon' + i).value]).addTo(map);
+        }
     }
-    data = data.slice(0, -1) + '$';
-    link.sendData(data, 1);
+});
+
+$('#load').click(function(){
+    //console.log("loading");
+    flag = false;
+    var data = '#';
+    for (var i = 0; i<5;i++) {
+        if ($('#lat' + i ).val() && $('#lon' + i ).val() )
+        {
+            data += $('#lat' + i ).val() + ',' + $('#lon' + i ).val() + '!' ;
+            flag = true;
+        }
+    }
+    if(flag)
+    {
+        data = data.slice(0, -1) + '$';
+        link.sendData(data, 1);
+        $('#send').prop('disabled', true);
+    }
 });
