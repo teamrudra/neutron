@@ -68,7 +68,7 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
 
 var initMap = function (latitude, longitude) {
     var map = L.map('map');
-    var m = L.marker([latitude, longitude]).addTo(map);
+    // var m = L.marker([latitude, longitude]).addTo(map);
     var position = L.control.mousePosition();
     var coordinates = L.control.coordinates({
                 position:"topright",
@@ -84,14 +84,8 @@ var initMap = function (latitude, longitude) {
     map.setView({
         lat: latitude,
         lng: longitude
-    }, 50);  
-    return map;  
+    }, 50);
+    return map;
 }
 
-// var update_marker = function( lat, lon){
-//     map.removeLayer(m);
-//     m = L.marker([lat, lon]).addTo(map);
-// }
-
 module.exports = initMap;
-// module.exports = update_marker;

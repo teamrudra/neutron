@@ -3,6 +3,7 @@ const server = dgram.createSocket('udp4');
 var host = '0.0.0.0';
 var port = 3301;
 var allowData = false;
+var oldPoint = 0;
 
 var m = 0;
 
@@ -13,6 +14,7 @@ var setupServer = function(map, port) {
     });
     server.on('message', (msg, rinfo) => {
         $("#rover").html(`${rinfo.address}:${rinfo.port}`);
+        // console.log(msg);
         var data = new TextDecoder("ascii").decode(msg);
         if (data[0] === '{')
             data = JSON.parse(data);
@@ -22,10 +24,11 @@ var setupServer = function(map, port) {
             document.getElementById("latitude").innerHTML = ""+data.lat;
             document.getElementById("longitude").innerHTML = ""+data.lon;
             document.getElementById("speed").innerHTML = ""+data.speed+"m/s";
-            // console.log(map[1]);
-            map[0].removeLayer(map[1]);     
-            map[1] = L.marker([data.lat, data.lon]).addTo(map[0]);
-            console.log(data);
+            console.log(oldPoint);
+            if(oldPoint != 0)
+                map.removeLayer(oldPoint);     
+            oldPoint = L.marker([data.lat, data.lon]).addTo(map);
+            // console.log(data);
         }
         $("#down").html(` ${msg.length}b`);
     });
