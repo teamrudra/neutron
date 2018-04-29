@@ -6,8 +6,6 @@ var compass = require('./compass');
 var point = [0, 0, 0, 0, 0];
 var count = 0;
 
-var flag = false;
-
 var DATA_RATE = 1; //ms
 
 var map = initMap(12.821260, 80.038329);
@@ -38,45 +36,38 @@ $('#remove').click(function() {
             map.removeLayer(point[i]);
     }
     count = 0;
-    if(flag)
-        link.sendData('$#', 1);
-    $('#send').prop('disabled', false);
+    link.sendData('$#', 1);
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#send').click(function() {
-    var data = '#';
-    if(flag)
-        link.sendData(data, 1);
+    link.sendData('@', 1);
+    $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
 });
 
-$('#show').click(function(){
+$('#sendall').click(function() {
+    link.sendData('*', 1);
+    $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+});
+
+$('#show').click(function() {
     for (var i = 0; i<5;i++) {
-        if ($('#lat' + i ).val() && $('#lon' + i ).val() )
-        {
-            //console.log(typeof(parseInt($('#lat' + i).val())));
-            if(point[i]!=0)
+        if ($('#lat' + i ).val() && $('#lon' + i ).val() ) {
+            if (point[i])
                 map.removeLayer(point[i]);
-            // jQuery here to look cool.
-            point[i] = L.marker([document.getElementById('lat' + i).value,document.getElementById('lon' + i).value]).addTo(map);
+            point[i] = L.marker([$('#lat' + i ).val(), $('#lon' + i).val()]);
+            point[i].addTo(map);
         }
     }
 });
 
-$('#load').click(function(){
-    //console.log("loading");
-    flag = false;
+$('#load').click(function() {
     var data = '#';
     for (var i = 0; i<5;i++) {
-        if ($('#lat' + i ).val() && $('#lon' + i ).val() )
-        {
+        if ($('#lat' + i ).val() && $('#lon' + i ).val() ) {
             data += $('#lat' + i ).val() + ',' + $('#lon' + i ).val() + '!' ;
-            flag = true;
         }
     }
-    if(flag)
-    {
-        data = data.slice(0, -1) + '$';
-        link.sendData(data, 1);
-        $('#send').prop('disabled', true);
-    }
+    data = data.slice(0, -1) + '$';
+    link.sendData(data, 1);
 });
