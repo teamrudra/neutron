@@ -66,9 +66,21 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
     maxZoom: 19
 });
 
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [100,100],
+        iconAnchor:   [50,50],
+    }
+});
+
+var getIcons = function(url){
+    var ficon = new LeafIcon({iconUrl:url});
+    return ficon;
+}
+
+
 var initMap = function (latitude, longitude) {
     var map = L.map('map');
-    // var m = L.marker([latitude, longitude]).addTo(map);
     var position = L.control.mousePosition();
     var coordinates = L.control.coordinates({
                 position:"topright",
@@ -88,4 +100,5 @@ var initMap = function (latitude, longitude) {
     return map;
 }
 
-module.exports = initMap;
+module.exports.initMap = initMap;
+module.exports.getIcons = getIcons;
