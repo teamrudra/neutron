@@ -37,13 +37,36 @@ $('#remove').click(function() {
     }
     count = 0;
     link.sendData('$#', 1);
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#send').click(function() {
+    link.sendData('@', 1);
+    $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+});
+
+$('#sendall').click(function() {
+    link.sendData('*', 1);
+    $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+});
+
+$('#show').click(function() {
+    for (var i = 0; i<5;i++) {
+        if ($('#lat' + i ).val() && $('#lon' + i ).val() ) {
+            if (point[i])
+                map.removeLayer(point[i]);
+            point[i] = L.marker([$('#lat' + i ).val(), $('#lon' + i).val()]);
+            point[i].addTo(map);
+        }
+    }
+});
+
+$('#load').click(function() {
     var data = '#';
     for (var i = 0; i<5;i++) {
-        if ($('#lat' + i ).val() && $('#lon' + i ).val() )
+        if ($('#lat' + i ).val() && $('#lon' + i ).val() ) {
             data += $('#lat' + i ).val() + ',' + $('#lon' + i ).val() + '!' ;
+        }
     }
     data = data.slice(0, -1) + '$';
     link.sendData(data, 1);

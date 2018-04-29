@@ -1,6 +1,6 @@
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
-var host = '0.0.0.0';
+var host = '192.168.1.33';
 var port = 3301;
 var allowData = false;
 var oldPoint = 0;
@@ -14,17 +14,7 @@ var setupServer = function(map, port) {
     });
     server.on('message', (msg, rinfo) => {
         $("#rover").html(`${rinfo.address}:${rinfo.port}`);
-        var data = new TextDecoder("ascii").decode(msg);
-        if (data[0] === '{')
-            data = JSON.parse(data);
-        if (data.class === 'TPV') {
-            $('#latitude').html(data.lat);
-            $('#longitude').html(data.lon);
-            $('#speed').html(data.speed + ' m/s');
-            if(oldPoint != 0)
-                map.removeLayer(oldPoint);     
-            oldPoint = L.marker([data.lat, data.lon]).addTo(map);
-        }
+        processMessage(map, msg, rinfo);
         $("#down").html(` ${msg.length}b`);
     });
     server.on('listening', () => {
@@ -56,6 +46,22 @@ var sendData = function(data, override) { // data should be string
             // TODO create log
         });
         console.log(data);
+    }
+}
+
+var processMessage = function(map, msg, rinfo) {
+    var data = new TextDecoder("ascii").decode(msg);
+    if (data[0] === '{')
+        data = JSON.parse(data);
+    if (data.class === 'TPV') {
+        console.log(data.lat + " , " + data.lon);
+        $('#latitude').html(data.lat);
+        $('#longitude').html(data.lon);
+        $('#speed').html(data.speed + ' m/s');
+        if(oldPoint != 0)
+            map.removeLayer(oldPoint);     
+        oldPoint = L.marker([data.lat, data.lon])
+        oldPoint = oldPoint.addTo(map);
     }
 }
 
