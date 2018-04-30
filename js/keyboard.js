@@ -1,6 +1,6 @@
 var keyMap = { "w":false , "a": false, "s":false, "d":false ,
                "q":false , "e":false , "t":false , "Control":false ,
-               "ArrowLeft":false , "ArrowRight":false , "ArrowUp":false , "ArrowDown":false ,
+               "ArrowRight":false , "ArrowLeft":false , "ArrowUp":false , "ArrowDown":false ,
                "j":false , "k":false , "l": false, "Shift":false, "i": false, "o": false };
 
 var initKeyboard = function() {
