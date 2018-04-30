@@ -74,3 +74,7 @@
 	z-index: 1000;
 	background-image: url("../images/needle.png");
 }
+
+button:disabled {
+    background: #9fa0a0;
+}
