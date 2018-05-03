@@ -66,18 +66,14 @@ var offlineControl = L.control.offline(offlineLayer, tilesDb, {
     maxZoom: 19
 });
 
-var LeafIcon = L.Icon.extend({
-    options: {
-        iconSize:     [100,100],
-        iconAnchor:   [50,50],
-    }
-});
-
-var getIcons = function(url){
-    var ficon = new LeafIcon({iconUrl:url});
-    return ficon;
+var getIcons = function (url, size, classname){
+    return new L.icon({
+        iconUrl: url,
+        iconSize: [size, size],
+        iconAnchor: [size/2, size/2],
+        className: classname || ''
+    });
 }
-
 
 var initMap = function (latitude, longitude) {
     var map = L.map('map');

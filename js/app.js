@@ -1,15 +1,14 @@
-var MapLayer = require('./map');
+var layer = require('./map');
 var link = require('./communication');
 var control = require('./keyboard');
-var compass = require('./compass');
 
 var point = [0, 0, 0, 0, 0];
 var count = 0;
 
 var DATA_RATE = 1; //ms
 
-var map = MapLayer.initMap(12.821260, 80.038329);//12.821260, 80.038329
-var testicon=MapLayer.getIcons("../images/Black_dot.png");
+var map = layer.initMap(12.821260, 80.038329);//12.821260, 80.038329
+var waypoint = layer.getIcons("../images/point.png", 20);
 link.setupServer(map, 23907); // Groud Station server listning on 23907 never change!!!!
 control.initKeyboard();
 
@@ -19,13 +18,10 @@ setInterval(function() {
     link.sendData("<" + data[0] + "," + data[1] + ">", 0);
 }, DATA_RATE);
 
-
-
-
 map.on('click', function(e) {
     if (point[count])
         map.removeLayer(point[count]);
-    point[count] =  L.marker(e.latlng, {icon:testicon});//L.marker(e.latlng);
+    point[count] =  L.marker(e.latlng, {icon: waypoint});//L.marker(e.latlng);
     point[count].addTo(map);
     $('#lat' + count).val(e.latlng.lat.toFixed(6));
     $('#lon' + count).val(e.latlng.lng.toFixed(6));
