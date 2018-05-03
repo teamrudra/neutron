@@ -5,6 +5,7 @@ var host = '192.168.1.33';
 var port = 3301;
 var allowData = false;
 var oldPoint = 0;
+var i = 0;
 
 var m = 0;
 
@@ -59,7 +60,12 @@ var processMessage = function(map, msg, rinfo) {
     {
       var dat = data.split(",");
       // console.log(typeof(parseFloat(dat[1])));
+      // $('#cons').append(typeof(parseFloat(dat[1]))+"\n");
       $('#heading').html(dat[1]);
+      $('#content').append(dat[1]+"\n\n");
+      var elem = document.getElementById('non');
+      // elem.scrollTop = elem.scrollHeight - elem.clientHeight;
+      elem.scrollIntoView(false);
       needle.compass(dat[1]);
       if(dat[2]=='%')
       {

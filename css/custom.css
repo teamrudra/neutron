@@ -1,5 +1,5 @@
-#map { 
-    height: 85%; 
+#map {
+    height: 85%;
 }
 
 #info {
@@ -77,4 +77,10 @@
 
 button:disabled {
     background: #9fa0a0;
+}
+
+#content {
+    height: 180px;
+    width: 100px;
+    /* background-color: coral; */
 }
