@@ -18,7 +18,9 @@ var setupServer = function (map, port) {
     server.on('message', (msg, rinfo) => {
         $("#rover").html(`${rinfo.address}:${rinfo.port}`);
         processMessage(map, msg, rinfo);
+        // console.log(head);
         $("#down").html(` ${msg.length}b`);
+        // return head;
     });
     server.on('listening', () => {
         const address = server.address();
@@ -48,7 +50,7 @@ var sendData = function (data, override) { // data should be string
             $("#up").html(` ${bytes}b`);
             // TODO create log
         });
-        console.log(data);
+        // console.log(data);
     }
 }
 

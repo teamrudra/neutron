@@ -38,16 +38,19 @@ $('#remove').click(function() {
     count = 0;
     link.sendData('$#', 1);
     $('[id^=send]').prop('disabled', true);
+    $('#autoStatus').removeClass('yellow').removeClass('green').addClass('red');
 });
 
 $('#send').click(function() {
     link.sendData('@', 1);
     $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#sendall').click(function() {
     link.sendData('*', 1);
     $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#show').click(function() {
