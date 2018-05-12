@@ -1,7 +1,7 @@
 var MapLayer = require('./map');
 var link = require('./communication');
 var control = require('./keyboard');
-var compass = require('./compass');
+var needle = require('./compass');
 
 var point = [0, 0, 0, 0, 0];
 var count = 0;
@@ -18,7 +18,6 @@ setInterval(function() {
     var data = control.processKeys();
     link.sendData("<" + data[0] + "," + data[1] + ">", 0);
 }, DATA_RATE);
-
 
 
 
@@ -42,16 +41,19 @@ $('#remove').click(function() {
     count = 0;
     link.sendData('$#', 1);
     $('[id^=send]').prop('disabled', true);
+    $('#autoStatus').removeClass('yellow').removeClass('green').addClass('red');
 });
 
 $('#send').click(function() {
     link.sendData('@', 1);
     $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#sendall').click(function() {
     link.sendData('*', 1);
     $('#autoStatus').removeClass('yellow').removeClass('red').addClass('green');
+    $('[id^=send]').prop('disabled', true);
 });
 
 $('#show').click(function() {
